@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>JohnTW's Blog</title>
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="stylesheets/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="shortcut icon" href="http://www.miankoutu.com/uploadfiles/2015-11-8/2015118121958937.png" type="image/x-icon" />
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/tower.js"></script>
+    <script src="javascripts/fdb-all.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  </head>
+  <body>
+  <nav style="text-align:center" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">John的紀錄誌</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-center" id="myNavbar">
+    <ul class="nav navbar-nav">
+      <li><a href="#">關於我</a></li>
+      <li><a href="#">關於程式</a></li>
+      <li><a href="#">關於新媒體閱讀</a></li>
+      <li><a href="#">關於生活</a></li>
+    </ul>  
+    <ul class="nav navbar-nav navbar-right">  
+      <li class="dropdown pull-right">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">關於你<span class="caret"></span></a>
+    <ul class="dropdown-menu ">
+        <li><a href="#">你的事</a></li>
+        <li><a href="#">你的喜好</a></li>
+      <li><a href="#">登出</a></li>
+    </ul>
+</li>
+    </ul>
+   </div>
+  </div>
+  </nav>
+<div class="container"> <!-- container 在最外層 -->
+  <div class="row">     <!-- row 在中間 -->
+    <div class="col-md-4 col-xs-12">    
+        <h3>John Liu(John劉)</h3><br>
+        <img src="image/下載.jpg"><br>
+    </div>
+    <div class="col-md-8 col-xs-12">
+        <br><br>
+        <p>你好，我是John劉，有些人喜歡，有些人不喜歡，可能因為我有John味。</p>
+        <p>我喜歡寫程式，也喜歡看看商業文章，彈彈吉他，講講廢話。</p>
+        <p>我來自動物園旁邊的大學，還在思考哪一年可能念個研究所，洗個學歷。</p>
+        <p>我沒有狗，沒有貓，沒有黃金鼠，沒有汽車，沒有房子，沒有小孩，但希望有天以上通通都有。</p>
+        <p>希望你喜歡看我的東西，大部分可能都是科技或吃東西，如果有愛或是有幹，歡迎<a href='mailto:john831118@gmail.com'>寫信給我。</a></p>
+        <p>如果你有興趣想知道敝人本人在下我怎麼養活自己的，可以參考我的<a href='https://www.cakeresume.com/john-2c2d4f'>Cake Resume</a>，這真的是很潮的Landing page製作網站。</p>
+    </div>
+    <div class="col-md-12 col-xs-12"> 
+         <h3>Reference:</h3>
+        <a class='btn btn-primary' href="https://github.com/nick66551">我的Github</a>
+        <a class='btn btn-primary' href="http://orangeappletw.github.io/JavaScript-Advanced-textbook/" target="_blank">JSA-gitbook</a>
+       
+    </div>
+    <div class="modal fade" role="dialog" id='Ask'>
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">留下你的資料吧</h4>
+      </div>
+      <div class="modal-body">
+        
+        <p id='searchresult'></p>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+    <div class='col-md-12 col-xs-12'>
+    <h1>留言區</h1> 
+    <input id='search'>
+    <input type='button' class='btn btn-info btn-md' onclick='search()' data-toggle="modal" data-target="#Ask" value='搜尋'>
+    <div id='comment'>
+    <table class="table table-hover" id="commenttable">
+        <thead>
+            <tr>
+                <td>標題</td>
+                <td>類型</td>
+                <td>內容</td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <table class="table table-hover" id="idtable">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>刪除</td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <br>
+    標題：<input id="title"><br>
+    類型：<input id="type"><br>
+    內容：<textarea id="content"></textarea><br>
+    <input type='button' class='btn btn-info btn-md' id='additem' onclick='additem()' value='新增留言'>
+    </div>
+    <input type='button' class='btn btn-info btn-md' id='additem' onclick='showitem()' value='載入留言'>
+    </div>
+</div>
+</div>
+    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+    var fdb = new ForerunnerDB();
+    var db = fdb.db("資料庫");
+    ArticleCollection = db.collection('articles');
+    ArticleCollection.load(); 
+    $("div#comment").hide();
+    
+    function showitem(){
+    $("tbody").text("");
+    $("div#comment").show();
+    for(var i=0;i<ArticleCollection.find().length;i++){
+    var commentdata="<tr><td>"+ArticleCollection.find()[i].title+"</td><td>"+ArticleCollection.find()[i].type+"</td><td>"+ArticleCollection.find()[i].content+"</td></tr>"
+    var searchdata="<tr><td><a id='items' data-toggle='modal' data-target='#Ask'>"+ArticleCollection.find()[i]._id+"</a></td><td><button id='deleteitem' data-id='"+ArticleCollection.find()[i]._id+"'>刪除</button></td></tr>"
+    $("table#commenttable tbody").append(commentdata);
+    $("table#idtable tbody").append(searchdata);
+    };
+    };     
+      
+    function additem(){
+    ArticleCollection.insert({
+    title: $("input#title").val(),
+    type: $("input#type").val(),
+    content: $("textarea#content").val(),
+    });
+    ArticleCollection.save()
+    showitem();
+    alert(JSON.stringify(ArticleCollection.find()));
+    }  
+    function search(){
+    var query={
+        type: $("input#search").val()
+    }
+    $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
+    
+    };
+      
+    function searchdetail(){
+    var id = $(this).text();
+    var query={
+        _id: id
+    };
+      console.log(id);
+    $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
+    };
+    /*  
+    function deleteitem(){
+    var r=confirm("你確定要刪掉嗎？")
+    if(r){
+    var id = $(this).closest("tr")[0].firstChild.innerText;
+    console.log(id)
+    ArticleCollection.remove({
+      _id: id
+    });
+    ArticleCollection.save();
+    showitem();
+    }
+    else{
+    alert("你沒有刪掉唷");
+    }
+      
+    }
+    */
+    function deleteitem(){
+    var id = $(this).data("id");
+    console.log(id)
+    var r=confirm("你確定要刪掉嗎？")
+    if(r){
+    ArticleCollection.remove({
+      _id:id
+    });  
+    ArticleCollection.save();
+    showitem();
+    }
+    else{
+    alert("你沒有刪掉唷");
+    }
+    }
+      
+    $("table").on("click","a#items",searchdetail);
+     
+    $("table").on("click","button#deleteitem",deleteitem);
+    </script>
+  </body>
+</html>

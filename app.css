@@ -1,0 +1,16 @@
+
+.redfont{
+	color: red;
+}
+h1.redfont{font-size: 59px;}
+.bluefont{
+	color: blue;
+}
+
+#header{
+	color : yellow;
+}
+#content{
+	color : blue;
+	font-size : 100px;
+}
