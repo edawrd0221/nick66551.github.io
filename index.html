@@ -183,7 +183,7 @@
     $("div#comment").show();
     for(var i=0;i<ArticleCollection.find().length;i++){
     var commentdata="<tr><td>"+ArticleCollection.find()[i].title+"</td><td>"+ArticleCollection.find()[i].type+"</td><td>"+ArticleCollection.find()[i].content+"</td></tr>"
-    var searchdata="<tr><td><a id='items' data-toggle='modal' data-target='#idData'>"+ArticleCollection.find()[i]._id+"</a></td><td><button id='edititem' class='btn btn-warning' data-toggle='modal' data-target='#editData' data-id='"+ArticleCollection.find()[i]._id+"'>編輯</button><button id='deleteitem' class='btn btn-danger' data-id='"+ArticleCollection.find()[i]._id+"'>刪除</button></td></tr>"
+    var searchdata="<tr><td><a id='items' data-toggle='modal' data-target='#idData'>"+ArticleCollection.find()[i]._id+"</a></td><td><button id='edititem' class='btn btn-warning' data-toggle='modal' data-target='#editData' data-id='"+ArticleCollection.find()[i]._id+"'>編輯</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id='deleteitem' class='btn btn-danger' data-id='"+ArticleCollection.find()[i]._id+"'>刪除</button></td></tr>"
     $("table#commenttable tbody").append(commentdata);
     $("table#idtable tbody").append(searchdata);
     };
