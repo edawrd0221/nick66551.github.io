@@ -4,3 +4,6 @@ body{
 p #childcomment{
  border-style: groove;
 } 
+.newComment{
+	text-align: center;
+}

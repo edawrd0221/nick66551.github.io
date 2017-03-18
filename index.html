@@ -71,12 +71,15 @@
         <a class='btn btn-primary' href="http://orangeappletw.github.io/JavaScript-Advanced-textbook/" target="_blank">JSA-gitbook</a>
        
     </div>
-    <div class="modal fade" role="dialog" id='Ask'>
+
+    // Modal for Id Table
+
+    <div class="modal fade" role="dialog" id='idData'>
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">留下你的資料吧</h4>
+        <h4 class="modal-title">這邊有id的詳細資料</h4>
       </div>
       <div class="modal-body">
         
@@ -88,13 +91,48 @@
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    //Modal for edit data
+    <div class="modal fade" role="dialog" id='editData'>
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">更新你的資料吧</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+        <label for="editTitle">標題</label>
+        <input type="text" class="form-control" id="editTitle">
+        </div>
+        <div class="form-group">
+        <label for="editType">類型</label>
+        <input type="text" class="form-control" id="editType">
+        </div>
+        <div class="form-group">
+        <label for="editContent">內容</label>
+        <input type="text" class="form-control" id="editContent">
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="editItem()">儲存</button>
+      </div>
+    </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class='col-md-12 col-xs-12'>
     <h1>留言區</h1> 
     <input id='search'>
     <input type='button' class='btn btn-info btn-md' onclick='search()' data-toggle="modal" data-target="#Ask" value='搜尋'>
+    <input type='button' class='btn btn-info btn-md' id='additem' onclick='showitem()' value='載入留言'>
     <div id='comment'>
+    <h2 class="commentTableLabel">Comment Table</h2>
     <table class="table table-hover" id="commenttable">
         <thead>
             <tr>
@@ -106,23 +144,26 @@
         <tbody>
         </tbody>
     </table>
+    <h2 class="idTableLabel">Id Table</h2>
     <table class="table table-hover" id="idtable">
         <thead>
             <tr>
-                <td>id</td>
-                <td>刪除</td>
+                <td>Id</td>
+                <td>各種功能鍵</td>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
+    <div class="newComment">
     <br>
     標題：<input id="title"><br>
     類型：<input id="type"><br>
     內容：<textarea id="content"></textarea><br>
     <input type='button' class='btn btn-info btn-md' id='additem' onclick='additem()' value='新增留言'>
+
     </div>
-    <input type='button' class='btn btn-info btn-md' id='additem' onclick='showitem()' value='載入留言'>
+    </div>
     </div>
 </div>
 </div>
@@ -131,6 +172,8 @@
     <script>
     var fdb = new ForerunnerDB();
     var db = fdb.db("資料庫");
+    var editDataId;
+
     ArticleCollection = db.collection('articles');
     ArticleCollection.load(); 
     $("div#comment").hide();
@@ -140,7 +183,7 @@
     $("div#comment").show();
     for(var i=0;i<ArticleCollection.find().length;i++){
     var commentdata="<tr><td>"+ArticleCollection.find()[i].title+"</td><td>"+ArticleCollection.find()[i].type+"</td><td>"+ArticleCollection.find()[i].content+"</td></tr>"
-    var searchdata="<tr><td><a id='items' data-toggle='modal' data-target='#Ask'>"+ArticleCollection.find()[i]._id+"</a></td><td><button id='deleteitem' data-id='"+ArticleCollection.find()[i]._id+"'>刪除</button></td></tr>"
+    var searchdata="<tr><td><a id='items' data-toggle='modal' data-target='#idData'>"+ArticleCollection.find()[i]._id+"</a></td><td><button id='edititem' class='btn btn-warning' data-toggle='modal' data-target='#editData' data-id='"+ArticleCollection.find()[i]._id+"'>編輯</button><button id='deleteitem' class='btn btn-danger' data-id='"+ArticleCollection.find()[i]._id+"'>刪除</button></td></tr>"
     $("table#commenttable tbody").append(commentdata);
     $("table#idtable tbody").append(searchdata);
     };
@@ -191,25 +234,53 @@
     }
     */
     function deleteitem(){
-    var id = $(this).data("id");
-    console.log(id)
-    var r=confirm("你確定要刪掉嗎？")
-    if(r){
-    ArticleCollection.remove({
-      _id:id
-    });  
-    ArticleCollection.save();
-    showitem();
+     var id = $(this).data("id");
+     var r=confirm("你確定要刪掉嗎？")
+     if(r){
+     ArticleCollection.remove({
+       _id:id
+     });  
+     ArticleCollection.save();
+     showitem();
+     }
+     else{
+     alert("你沒有刪掉唷");
+     }
     }
-    else{
-    alert("你沒有刪掉唷");
+
+    function editModal(){
+       editDataId = $(this).data("id");
+       var query={
+        _id: editDataId
+    } 
+       $("input#editTitle").val(ArticleCollection.find(query)[0].title);
+       $("input#editType").val(ArticleCollection.find(query)[0].type);
+       $("input#editContent").val(ArticleCollection.find(query)[0].content);
     }
+     
+    function editItem(){
+        var newData = {
+          title: $("input#editTitle").val(),
+          type: $("input#editType").val(),
+          content: $("input#editContent").val()
+        };
+        var r=confirm("你確定要更新嗎？一去不回頭唷")
+        if(r){
+         ArticleCollection.updateById(editDataId,newData);
+         ArticleCollection.save();
+        }
+        else{
+         alert("謹言慎行過每一天。")
+     
+        }
     }
       
     $("table").on("click","a#items",searchdetail);
-     
     $("table").on("click","button#deleteitem",deleteitem);
+    $("table").on("click","button#edititem",editModal);
+
     </script>
     
   </body>
+    }
 </html>
