@@ -72,7 +72,7 @@
        
     </div>
 
-    // Modal for Id Table
+    <!-- Modal for Id Data -->
 
     <div class="modal fade" role="dialog" id='idData'>
     <div class="modal-dialog" role="document">
@@ -94,7 +94,8 @@
     </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    //Modal for edit data
+    <!-- Modal for edit data -->
+
     <div class="modal fade" role="dialog" id='editData'>
     <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -126,11 +127,16 @@
     </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div class='col-md-12 col-xs-12'>
+    <div class='col-md-12 col-xs-12' style="border-color: black;border-style: double;margin: 10px auto">
     <h1>留言區</h1> 
+    <h2>精準搜尋</h2>
     <input id='search'>
-    <input type='button' class='btn btn-info btn-md' onclick='search()' data-toggle="modal" data-target="#Ask" value='搜尋'>
-    <input type='button' class='btn btn-info btn-md' id='additem' onclick='showitem()' value='載入留言'>
+    <input type='button' class='btn btn-info btn-md' onclick='search()' data-toggle="modal" data-target="#idData" value='搜尋'>
+    <h2>條件搜尋</h2>
+    <input id='searchless' type="number" name="quantity" min="0" max="5000" placeholder="小於...">
+    <input id='searchGreater' type="number" name="quantity" min="0" max="5000" placeholder="大於...">
+    <input type='button' class='btn btn-info btn-md' onclick='searchCondition()' data-toggle="modal" data-target="#idData" value='搜尋'>
+    <input type='button' class='btn btn-info btn-md' id='showAllItem' onclick='showitem()' value='載入留言'>
     <div id='comment'>
     <h2 class="commentTableLabel">Comment Table</h2>
     <table class="table table-hover" id="commenttable">
@@ -157,8 +163,9 @@
     </table>
     <div class="newComment">
     <br>
+    <h2 class="addCommentForm">Add Comment</h2>
     標題：<input id="title"><br>
-    類型：<input id="type"><br>
+    類型：<input id="type" type="number" name="quantity" min="0" max="5000"><br>
     內容：<textarea id="content"></textarea><br>
     <input type='button' class='btn btn-info btn-md' id='additem' onclick='additem()' value='新增留言'>
 
@@ -179,6 +186,7 @@
     $("div#comment").hide();
     
     function showitem(){
+    $("#showAllItem").hide();
     $("tbody").text("");
     $("div#comment").show();
     for(var i=0;i<ArticleCollection.find().length;i++){
@@ -199,6 +207,7 @@
     showitem();
     alert(JSON.stringify(ArticleCollection.find()));
     }  
+    
     function search(){
     var query={
         type: $("input#search").val()
@@ -215,7 +224,40 @@
       console.log(id);
     $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
     };
+
+    function searchCondition(){
+      
+      if($("#searchless").val()!=""){
+        var result = ArticleCollection.find({
+           type: {
+        "$gt": $("#searchGreater").val()/1,
+        "$lt": $("#searchless").val()/1
+           }
+        });
+         $("p#searchresult").text("");    
+        for(var i=0; i<result.length;i++){
+         $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
+        }
+      }
+      else{
+        var result = ArticleCollection.find({
+           type: {
+        "$gt": $("#searchGreater").val()/1
+           }
+        });
+         $("p#searchresult").text("");  
+        for(var i=0; i<result.length;i++){       
+         $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
+        }
+      }
+
+
+
+    }
     /*  
+
+    First method to delete item
+
     function deleteitem(){
     var r=confirm("你確定要刪掉嗎？")
     if(r){
@@ -273,6 +315,7 @@
          alert("謹言慎行過每一天。")
      
         }
+        showitem();
     }
       
     $("table").on("click","a#items",searchdetail);
