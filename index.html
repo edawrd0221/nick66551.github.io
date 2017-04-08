@@ -72,11 +72,7 @@
        
     </div>
 
-<<<<<<< HEAD
-    <!-- Modal for Id Data -->
-=======
-    <!-- Modal for Id Table -->
->>>>>>> 433f5605e29f41c445f80e22cb76a178f56a1f27
+    <!-- Modal for search result Table -->
 
     <div class="modal fade" role="dialog" id='idData'>
     <div class="modal-dialog" role="document">
@@ -94,15 +90,12 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
-    </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div>
+    </div>
+    </div>
 
     <!-- Modal for edit data -->
-<<<<<<< HEAD
 
-=======
->>>>>>> 433f5605e29f41c445f80e22cb76a178f56a1f27
     <div class="modal fade" role="dialog" id='editData'>
     <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -130,19 +123,26 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="editItem()">儲存</button>
       </div>
-    </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div>
+    </div>
+    </div>
+
+    <!-- 留言區  -->
 
     <div class='col-md-12 col-xs-12' style="border-color: black;border-style: double;margin: 10px auto">
     <h1>留言區</h1> 
     <h2>精準搜尋</h2>
     <input id='search'>
     <input type='button' class='btn btn-info btn-md' onclick='search()' data-toggle="modal" data-target="#idData" value='搜尋'>
-    <h2>條件搜尋</h2>
+    <h2>條件搜尋(大小)</h2>
     <input id='searchless' type="number" name="quantity" min="0" max="5000" placeholder="小於...">
     <input id='searchGreater' type="number" name="quantity" min="0" max="5000" placeholder="大於...">
     <input type='button' class='btn btn-info btn-md' onclick='searchCondition()' data-toggle="modal" data-target="#idData" value='搜尋'>
+    <h2>條件搜尋(包含)</h2>
+    數學類<input id='searchContain' value="數學類" type="checkbox">
+    英文類<input id='searchContain' value="英文類" type="checkbox"> 
+    歌詞類<input id='searchContain' value="歌詞類" type="checkbox">  
+    <input type='button' class='btn btn-info btn-md' onclick='searchContainCondition()' value='搜尋'>
     <input type='button' class='btn btn-info btn-md' id='showAllItem' onclick='showitem()' value='載入留言'>
     <div id='comment'>
     <h2 class="commentTableLabel">Comment Table</h2>
@@ -184,6 +184,9 @@
     
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     <script>
+
+    //資料庫初始化
+
     var fdb = new ForerunnerDB();
     var db = fdb.db("資料庫");
     var editDataId;
@@ -192,6 +195,8 @@
     ArticleCollection.load(); 
     $("div#comment").hide();
     
+    //載入資料
+
     function showitem(){
     $("#showAllItem").hide();
     $("tbody").text("");
@@ -203,7 +208,9 @@
     $("table#idtable tbody").append(searchdata);
     };
     };     
-      
+     
+    //新增資料
+
     function additem(){
     ArticleCollection.insert({
     title: $("input#title").val(),
@@ -215,6 +222,8 @@
     alert(JSON.stringify(ArticleCollection.find()));
     }  
     
+    //使用者輸入文字搜尋
+
     function search(){
     var query={
         type: $("input#search").val()
@@ -222,7 +231,9 @@
     $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
     
     };
-      
+    
+    //使用者透過id搜尋
+
     function searchdetail(){
     var id = $(this).text();
     var query={
@@ -231,7 +242,9 @@
       console.log(id);
     $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
     };
-
+     
+    //使用者透過數字大小於條件搜尋
+     
     function searchCondition(){
       
       if($("#searchless").val()!=""){
@@ -245,6 +258,7 @@
         for(var i=0; i<result.length;i++){
          $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
         }
+        $('#idData').modal();
       }
       else{
         var result = ArticleCollection.find({
@@ -256,12 +270,37 @@
         for(var i=0; i<result.length;i++){       
          $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
         }
+        $('#idData').modal();
       }
-
-
-
     }
-    /*  
+ 
+    //使用者透過條件選擇搜尋
+
+    function searchContainCondition(){
+      
+      var checkList=[]
+      if($("#searchContain:checked").length>0){
+       for(var i=0;i<$("#searchContain:checked").length;i++){
+          checkList.push($("#searchContain:checked")[i].value)
+       }
+
+       var result = ArticleCollection.find({
+        content: { 
+          $in: checkList
+        }
+       });
+       $("p#searchresult").text("");  
+       for(var i=0; i<result.length;i++){       
+        $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
+       }
+       $('#idData').modal();
+
+      }
+      else{
+        alert("你沒有選喔")
+      }
+    }
+    /*  //利用拿到網頁上的id來刪除資料
 
     First method to delete item
 
@@ -282,6 +321,9 @@
       
     }
     */
+
+    //利用存資料在button裡刪除資料
+
     function deleteitem(){
      var id = $(this).data("id");
      var r=confirm("你確定要刪掉嗎？")
@@ -297,6 +339,8 @@
      }
     }
 
+    //呼叫編輯資料用的Modal
+
     function editModal(){
        editDataId = $(this).data("id");
        var query={
@@ -306,7 +350,10 @@
        $("input#editType").val(ArticleCollection.find(query)[0].type);
        $("input#editContent").val(ArticleCollection.find(query)[0].content);
     }
-     
+    
+    //編輯資料後儲存
+
+
     function editItem(){
         var newData = {
           title: $("input#editTitle").val(),
