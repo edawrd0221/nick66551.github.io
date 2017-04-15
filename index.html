@@ -43,7 +43,7 @@
     <ul class="dropdown-menu ">
         <li><a href="#">你的事</a></li>
         <li><a href="#">你的喜好</a></li>
-      <li><a href="#">登出</a></li>
+        <li><a href="#">登出</a></li>
     </ul>
 </li>
     </ul>
@@ -69,116 +69,125 @@
          <h3>Reference:</h3>
         <a class='btn btn-primary' href="https://github.com/nick66551">我的Github</a>
         <a class='btn btn-primary' href="http://orangeappletw.github.io/JavaScript-Advanced-textbook/" target="_blank">JSA-gitbook</a>
-       
     </div>
 
     <!-- Modal for search result Table -->
 
     <div class="modal fade" role="dialog" id='idData'>
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">這邊有id的詳細資料</h4>
-      </div>
-      <div class="modal-body">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">這邊有id的詳細資料</h4>
+          </div>
+          <div class="modal-body">
         
-        <p id='searchresult'></p>
+            <p id='searchresult'></p>
         
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
     <!-- Modal for edit data -->
 
     <div class="modal fade" role="dialog" id='editData'>
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">更新你的資料吧</h4>
-      </div>
-      <div class="modal-body">
-      <form>
-        <div class="form-group">
-        <label for="editTitle">標題</label>
-        <input type="text" class="form-control" id="editTitle">
-        </div>
-        <div class="form-group">
-        <label for="editType">類型</label>
-        <input type="text" class="form-control" id="editType">
-        </div>
-        <div class="form-group">
-        <label for="editContent">內容</label>
-        <input type="text" class="form-control" id="editContent">
-        </div>
-      </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="editItem()">儲存</button>
-      </div>
-    </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">更新你的資料吧</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="editTitle">標題</label>
+                <input type="text" class="form-control" id="editTitle">
+              </div>
+              <div class="form-group">
+                <label for="editType">類型</label>
+                <input type="text" class="form-control" id="editType">
+              </div>
+              <div class="form-group">
+                <label for="editContent">內容</label>
+                <input type="text" class="form-control" id="editContent">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="editItem()">儲存</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
     <!-- 留言區  -->
 
     <div class='col-md-12 col-xs-12' style="border-color: black;border-style: double;margin: 10px auto">
-    <h1>留言區</h1> 
-    <h2>精準搜尋</h2>
-    <input id='search'>
-    <input type='button' class='btn btn-info btn-md' onclick='search()' data-toggle="modal" data-target="#idData" value='搜尋'>
-    <h2>條件搜尋(大小)</h2>
-    <input id='searchless' type="number" name="quantity" min="0" max="5000" placeholder="小於...">
-    <input id='searchGreater' type="number" name="quantity" min="0" max="5000" placeholder="大於...">
-    <input type='button' class='btn btn-info btn-md' onclick='searchCondition()' value='搜尋'>
-    <h2>條件搜尋(包含)</h2>
-    數學類<input id='searchContain' value="數學類" type="checkbox">
-    英文類<input id='searchContain' value="英文類" type="checkbox"> 
-    歌詞類<input id='searchContain' value="歌詞類" type="checkbox">  
-    <input type='button' class='btn btn-info btn-md' onclick='searchContainCondition()' value='搜尋'>
-    <input type='button' class='btn btn-info btn-md' id='showAllItem' onclick='showitem()' value='載入留言'>
-    <div id='comment'>
-    <h2 class="commentTableLabel">Comment Table</h2>
-    <table class="table table-hover" id="commenttable">
-        <thead>
+      <h1>留言區</h1> 
+      <h2>精準搜尋</h2>
+      <input id='search'>
+      <input type='button' class='btn btn-info btn-md' onclick='search()' data-toggle="modal" data-target="#idData" value='搜尋'>
+      <h2>條件搜尋(大小)</h2>
+      <input id='searchless' type="number" name="quantity" min="0" max="5000" placeholder="小於...">
+      <input id='searchGreater' type="number" name="quantity" min="0" max="5000" placeholder="大於...">
+      <input type='button' class='btn btn-info btn-md' onclick='searchCondition()' value='搜尋'>
+      <h2>條件搜尋(包含)</h2>
+      數學類<input id='searchContain' value="數學類" type="checkbox">
+      英文類<input id='searchContain' value="英文類" type="checkbox"> 
+      歌詞類<input id='searchContain' value="歌詞類" type="checkbox">  
+      <input type='button' class='btn btn-info btn-md' onclick='searchContainCondition()' value='搜尋'>
+      <input type='button' class='btn btn-info btn-md' id='showAllItem' onclick='showitem()' value='載入留言'>
+      <div id='comment'>
+        <h2 class="commentTableLabel">Comment Table</h2>
+        <table class="table table-hover" id="commenttable">
+          <thead>
             <tr>
                 <td>標題</td>
                 <td>類型</td>
                 <td>內容</td>
+                <td>職業種類</td>>
             </tr>
         </thead>
         <tbody>
         </tbody>
-    </table>
-    <h2 class="idTableLabel">Id Table</h2>
-    <table class="table table-hover" id="idtable">
-        <thead>
+        </table>
+        <h2 class="idTableLabel">Id Table</h2>
+        <table class="table table-hover" id="idtable">
+          <thead>
             <tr>
                 <td>Id</td>
                 <td>各種功能鍵</td>
             </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+    </div>
     <div class="newComment">
-    <br>
-    <h2 class="addCommentForm">Add Comment</h2>
-    標題：<input id="title"><br>
-    類型：<input id="type" type="number" name="quantity" min="0" max="5000"><br>
-    內容：<textarea id="content"></textarea><br>
-    <input type='button' class='btn btn-info btn-md' id='additem' onclick='additem()' value='新增留言'>
-
+        <br>
+        <h2 class="addCommentForm">Add Comment</h2>
+        標題：<input id="title"><br>
+        類型：<input id="type" type="number" name="quantity" min="0" max="5000"><br>
+        內容：<textarea id="content"></textarea><br>
+        您的職業：<select id="category">
+                    <option value="0">請選擇職業</option>
+                 </select>
+        <input type='button' class='btn btn-info btn-md' id='additem' onclick='additem()' value='新增留言'>
+      </div>
     </div>
-    </div>
-    </div>
+    <div class="newCategory">
+        <br>
+        <h2 class="addCommentForm">Add Category</h2>
+        職業種類<input id="category"><br>
+        <input type='button' class='btn btn-info btn-md' id='addCategory' onclick='addCategory()' value='新增種類'>
+      </div>
+  </div>
 </div>
 </div>
     
@@ -192,69 +201,95 @@
     var editDataId;
 
     ArticleCollection = db.collection('articles');
+    CategoryCollection = db.collection('category');
     ArticleCollection.load(); 
+    CategoryCollection.load();
     $("div#comment").hide();
     
     //載入資料
 
     function showitem(){
-    $("#showAllItem").hide();
-    $("tbody").text("");
-    $("div#comment").show();
-    for(var i=0;i<ArticleCollection.find().length;i++){
-    var commentdata="<tr><td>"+ArticleCollection.find()[i].title+"</td><td>"+ArticleCollection.find()[i].type+"</td><td>"+ArticleCollection.find()[i].content+"</td></tr>"
-    var searchdata="<tr><td><a id='items' data-toggle='modal' data-target='#idData'>"+ArticleCollection.find()[i]._id+"</a></td><td><button id='edititem' class='btn btn-warning' data-toggle='modal' data-target='#editData' data-id='"+ArticleCollection.find()[i]._id+"'>編輯</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id='deleteitem' class='btn btn-danger' data-id='"+ArticleCollection.find()[i]._id+"'>刪除</button></td></tr>"
-    $("table#commenttable tbody").append(commentdata);
-    $("table#idtable tbody").append(searchdata);
-    };
+      $("#showAllItem").hide();
+      $("tbody").text("");
+      $("div#comment").show();
+      var categoryName = ""
+      for(var i=0;i<ArticleCollection.find().length;i++){
+        var Catquery={
+          _id: ArticleCollection.find()[i].categoryid
+        };
+        console.log(Catquery._id)
+        if(Catquery._id!=undefined){
+          categoryName = CategoryCollection.find(Catquery)[0].categoryname
+        }
+        else{
+          categoryName = "沒有填職業，已難過"
+        }
+        var commentdata="<tr><td>"+ArticleCollection.find()[i].title+"</td><td>"+ArticleCollection.find()[i].type+"</td><td>"+ArticleCollection.find()[i].content+"</td><td>"+categoryName+"</td></tr>"
+        var searchdata="<tr><td><a id='items' data-toggle='modal' data-target='#idData'>"+ArticleCollection.find()[i]._id+"</a></td><td><button id='edititem' class='btn btn-warning' data-toggle='modal' data-target='#editData' data-id='"+ArticleCollection.find()[i]._id+"'>編輯</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id='deleteitem' class='btn btn-danger' data-id='"+ArticleCollection.find()[i]._id+"'>刪除</button></td></tr>"
+        $("table#commenttable tbody").append(commentdata);
+        $("table#idtable tbody").append(searchdata);
+      };
+      for(var i=0;i<CategoryCollection.find().length;i++){
+        var optiondata = "<option value='"+CategoryCollection.find()[i]._id+"'>"+CategoryCollection.find()[i].categoryname+"</option>"
+        $("select#category").append(optiondata);
+      }
     };     
      
     //新增資料
 
     function additem(){
-    ArticleCollection.insert({
-    title: $("input#title").val(),
-    type: $("input#type").val(),
-    content: $("textarea#content").val(),
-    });
-    ArticleCollection.save()
-    showitem();
-    alert(JSON.stringify(ArticleCollection.find()));
+      ArticleCollection.insert({
+        title: $("input#title").val(),
+        type: $("input#type").val(),
+        content: $("textarea#content").val(),
+        categoryid: $("select#category :selected").val()
+      });
+      ArticleCollection.save()
+      showitem();
+      alert(JSON.stringify(ArticleCollection.find()));
     }  
     
+    //新增種類
+
+    function addCategory(){
+      CategoryCollection.insert({
+        categoryname: $("input#category").val()
+      });
+      CategoryCollection.save()
+      showitem();
+      alert(JSON.stringify(CategoryCollection.find()));
+    }     
+
     //使用者輸入文字搜尋
 
     function search(){
-    var query={
+      var query={
         type: $("input#search").val()
-    }
-    $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
-    
+      }
+      $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
     };
     
     //使用者透過id搜尋
 
     function searchdetail(){
-    var id = $(this).text();
-    var query={
+      var id = $(this).text();
+      var query={
         _id: id
-    };
-      console.log(id);
-    $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
+      };
+      $("p#searchresult").text(JSON.stringify(ArticleCollection.find(query)[0]));
     };
      
     //使用者透過數字大小於條件搜尋
      
-    function searchCondition(){
-      
+    function searchCondition(){      
       if($("#searchless").val()!=""){
         var result = ArticleCollection.find({
            type: {
-        "$gt": $("#searchGreater").val()/1,
-        "$lt": $("#searchless").val()/1
+            "$gt": $("#searchGreater").val()/1,
+            "$lt": $("#searchless").val()/1
            }
         });
-         $("p#searchresult").text("");    
+        $("p#searchresult").text("");    
         for(var i=0; i<result.length;i++){
          $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
         }
@@ -263,12 +298,12 @@
       else{
         var result = ArticleCollection.find({
            type: {
-        "$gt": $("#searchGreater").val()/1
+            "$gt": $("#searchGreater").val()/1
            }
         });
-         $("p#searchresult").text("");  
+        $("p#searchresult").text("");  
         for(var i=0; i<result.length;i++){       
-         $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
+          $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
         }
         $('#idData').modal();
       }
@@ -280,21 +315,20 @@
       
       var checkList=[]
       if($("#searchContain:checked").length>0){
-       for(var i=0;i<$("#searchContain:checked").length;i++){
+        for(var i=0;i<$("#searchContain:checked").length;i++){
           checkList.push($("#searchContain:checked")[i].value)
-       }
-
-       var result = ArticleCollection.find({
-        content: { 
-          $in: checkList
         }
-       });
-       $("p#searchresult").text("");  
-       for(var i=0; i<result.length;i++){       
-        $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
-       }
-       $('#idData').modal();
 
+        var result = ArticleCollection.find({
+          content: { 
+            $in: checkList
+          }
+        });
+        $("p#searchresult").text("");  
+        for(var i=0; i<result.length;i++){       
+          $("p#searchresult").append("title:"+result[i].title+"  type:"+result[i].type+"  content:"+result[i].content+"<br>")
+        }
+        $('#idData').modal();
       }
       else{
         alert("你沒有選喔")
@@ -325,17 +359,17 @@
     //利用存資料在button裡刪除資料
 
     function deleteitem(){
-     var id = $(this).data("id");
-     var r=confirm("你確定要刪掉嗎？")
-     if(r){
-     ArticleCollection.remove({
-       _id:id
-     });  
-     ArticleCollection.save();
-     showitem();
-     }
+      var id = $(this).data("id");
+      var r=confirm("你確定要刪掉嗎？")
+      if(r){
+        ArticleCollection.remove({
+          _id:id
+        });  
+        ArticleCollection.save();
+        showitem();
+      }
      else{
-     alert("你沒有刪掉唷");
+        alert("你沒有刪掉唷");
      }
     }
 
@@ -360,13 +394,13 @@
           type: $("input#editType").val(),
           content: $("input#editContent").val()
         };
-        var r=confirm("你確定要更新嗎？一去不回頭唷")
+        var r = confirm("你確定要更新嗎？一去不回頭唷")
         if(r){
-         ArticleCollection.updateById(editDataId,newData);
-         ArticleCollection.save();
+          ArticleCollection.updateById(editDataId,newData);
+          ArticleCollection.save();
         }
         else{
-         alert("謹言慎行過每一天。")
+          alert("謹言慎行過每一天。")
      
         }
         showitem();
